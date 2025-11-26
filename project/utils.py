@@ -73,8 +73,10 @@ def count_vowels(text: str) -> int:
 
 
 def fahrenheit_to_celsius(f: float) -> float:
-
     c = (f - 32.0) * (5.0 / 9.0)
     print(f"[LOG]: Конвертовано {f}°F у {c}°C.")
     return c
+
+
+
 
