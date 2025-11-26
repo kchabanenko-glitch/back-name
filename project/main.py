@@ -1,4 +1,5 @@
 from utils import (
+    get_ticket_price,
     greet_person,
     is_even,
     reverse_string,
@@ -41,5 +42,30 @@ def main():
     print(f"{temp_f}°F = {fahrenheit_to_celsius(temp_f)}°C")
 
 
+def run_ticket_price_tests():
+
+
+    while True:
+        try:
+            age_input = input("Введіть скільки вам років: ")
+
+            age = int(age_input)
+
+            if age < 0:
+                print("Вік не може бути від'ємним. Спробуйте ще раз.")
+                continue
+
+            break
+
+        except ValueError:
+            print("Це не число. Будь ласка, введіть вік цифрами.")
+
+
+    final_price = get_ticket_price(age)
+
+
+
+    print(f"Кінцева вартість: {final_price:.2f} грн")
+
 if __name__ == '__main__':
-    main()
+    run_ticket_price_tests()

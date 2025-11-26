@@ -78,5 +78,33 @@ def fahrenheit_to_celsius(f: float) -> float:
     return c
 
 
+def get_ticket_price(age: int) -> float:
+    BASE_PRICE: float = 100.0
 
+    if age < 0:
+        print(f"[LOG]: Помилка! Введено некоректний вік: {age}")
+        return 0.0
+
+    if age < 6:
+        print(f"[LOG]: Вік {age} років. Квиток безкоштовний (0%).")
+        return 0.0
+
+
+    elif age <= 17:
+        discount = 0.50
+        price = BASE_PRICE * (1 - discount)
+        print(f"[LOG]: Вік {age} років. Знижка 50%. Ціна: {price}.")
+        return price
+
+
+    elif age <= 59:
+        print(f"[LOG]: Вік {age} років. Повна ціна.")
+        return BASE_PRICE
+
+
+    else:
+        discount = 0.30
+        price = BASE_PRICE * (1 - discount)
+        print(f"[LOG]: Вік {age} років. Знижка 30%. Ціна: {price}.")
+        return price
 
