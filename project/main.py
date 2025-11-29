@@ -1,4 +1,7 @@
+from unittest import result
+
 import pytest
+from typing import Callable, Any, Dict
 from utils import (
     get_ticket_price,
     greet_person,
@@ -90,12 +93,58 @@ def run_ticket_price_tests():
         (-5, 0.0),
     ]
 )
+
 def test_get_ticket_price_boundaries(age: int, expected_price: float):
     actual_price = get_ticket_price(age)
 
     assert round(actual_price, 2) == round(expected_price, 2)
 
 
+def wrap_in_dict(func: Callable) -> Callable:
+
+
+    def wrapper(*args: Any, **kwargs: Any) -> Dict[str, Any]:
+        function_result = func(*args, **kwargs)
+
+
+        return {"result": function_result}
+
+
+    return wrapper
+
+
+
+print("--- Приклад 1: Функція, що повертає число ---")
+
+
+@wrap_in_dict
+def calculate_sum(a: int, b: int) -> int:
+
+    return a + b
+
+
+sum_result = calculate_sum(10, 5)
+print(f"Результат виклику calculate_sum(10, 5): {sum_result}")
+print(f"Тип результату: {type(sum_result)}")
+
+
+print("\n--- Приклад 2: Функція без аргументів, що повертає рядок ---")
+
+
+@wrap_in_dict
+def get_status() -> str:
+
+    return "Операція успішна"
+
+
+
+status_result = get_status()
+print(f"Результат виклику get_status(): {status_result}")
+
+
+
+
+
 if __name__ == '__main__':
-    run_ticket_price_tests()
+    wrap_in_dict()
 
