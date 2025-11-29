@@ -1,3 +1,4 @@
+import pytest
 from utils import (
     get_ticket_price,
     greet_person,
@@ -6,7 +7,7 @@ from utils import (
     calculate_average,
     add_person_to_list,
     count_vowels,
-    fahrenheit_to_celsius
+    fahrenheit_to_celsius,
 )
 
 def main():
@@ -67,5 +68,34 @@ def run_ticket_price_tests():
 
     print(f"Кінцева вартість: {final_price:.2f} грн")
 
+
+
+@pytest.mark.parametrize(
+    "age, expected_price",
+    [
+        (0, 0.0),
+        (5, 0.0),
+
+        (6, 50.0),
+        (10, 50.0),
+        (17, 50.0),
+
+        (18, 100.0),
+        (45, 100.0),
+        (59, 100.0),
+
+        (60, 70.0),
+        (90, 70.0),
+
+        (-5, 0.0),
+    ]
+)
+def test_get_ticket_price_boundaries(age: int, expected_price: float):
+    actual_price = get_ticket_price(age)
+
+    assert round(actual_price, 2) == round(expected_price, 2)
+
+
 if __name__ == '__main__':
     run_ticket_price_tests()
+
