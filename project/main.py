@@ -142,6 +142,57 @@ print(f"Результат виклику get_status(): {status_result}")
 
 
 
+R = TypeVar('R')
+
+
+def round_result(ndigits: int) -> Callable[[Callable[..., R]], Callable[..., R]]:
+
+
+    def decorator(func: Callable[..., R]) -> Callable[..., R]:
+
+
+        def wrapper(*args: Any, **kwargs: Any) -> R:
+
+            if isinstance(result, (int, float)):
+                return round(result, ndigits)
+            else:
+
+                return result
+
+        return wrapper
+
+    return decorator
+
+
+@round_result(ndigits=2)
+def divide_numbers(a: int, b: int) -> float:
+    return a / b
+
+
+
+result_1 = divide_numbers(10, 3)
+print(f"Результат divide_numbers(10, 3): {result_1} (Тип: {type(result_1)})")
+
+
+@round_result(ndigits=0)
+def calculate_area(radius: float) -> float:
+    import math
+    return math.pi * (radius ** 2)
+
+
+result_2 = calculate_area(2)
+print(f"Результат calculate_area(2): {result_2} (Тип: {type(result_2)})")
+
+
+
+@round_result(ndigits=3)
+def get_user_data(name: str) -> dict:
+
+    return {"name": name, "score": 98.7654321}
+
+
+result_3 = get_user_data("Alex")
+print(f"Результат get_user_data('Alex'): {result_3} (Тип: {type(result_3)})")
 
 if __name__ == '__main__':
     wrap_in_dict()
