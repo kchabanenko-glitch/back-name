@@ -1,5 +1,5 @@
 from unittest import result
-
+from typing import TypeVar
 import pytest
 from typing import Callable, Any, Dict
 from utils import (
@@ -100,6 +100,9 @@ def test_get_ticket_price_boundaries(age: int, expected_price: float):
     assert round(actual_price, 2) == round(expected_price, 2)
 
 
+
+
+
 def wrap_in_dict(func: Callable) -> Callable:
 
 
@@ -114,9 +117,6 @@ def wrap_in_dict(func: Callable) -> Callable:
 
 
 
-print("--- Приклад 1: Функція, що повертає число ---")
-
-
 @wrap_in_dict
 def calculate_sum(a: int, b: int) -> int:
 
@@ -127,8 +127,6 @@ sum_result = calculate_sum(10, 5)
 print(f"Результат виклику calculate_sum(10, 5): {sum_result}")
 print(f"Тип результату: {type(sum_result)}")
 
-
-print("\n--- Приклад 2: Функція без аргументів, що повертає рядок ---")
 
 
 @wrap_in_dict
