@@ -1,4 +1,5 @@
 from unittest import result
+from book_library import Book, Library
 from typing import TypeVar
 import pytest
 from typing import Callable, Any, Dict
@@ -194,6 +195,37 @@ def get_user_data(name: str) -> dict:
 result_3 = get_user_data("Alex")
 print(f"Результат get_user_data('Alex'): {result_3} (Тип: {type(result_3)})")
 
+
+
+
+
+def run_library_demo():
+
+    book_a = Book(author="Джордж Орвелл", title="1984")
+    book_b = Book(author="Тарас Шевченко", title="Кобзар")
+    book_c = Book(author="Рей Бредбері", title="451° за Фаренгейтом")
+
+
+    id_for_removal = book_a.id
+    print(f"Створено книгу '{book_a.title}'. Її ID для видалення: {id_for_removal[:8]}...")
+
+
+    main_library = Library("Міська Центральна Бібліотека")
+
+    main_library.add_book(book_a)
+    main_library.add_book(book_b)
+    main_library.add_book(book_c)
+
+    main_library.display_books()
+
+    main_library.remove_book(id_for_removal)
+
+    main_library.remove_book("неіснуючий-id-123")
+
+    main_library.display_books()
+
+
 if __name__ == '__main__':
-    wrap_in_dict()
+    run_library_demo()
+
 
